@@ -1,0 +1,11 @@
+# File types to ignore
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+/**/*.nc
+
+# Folders to ignore (contain raw .nc files)	
+Mendota/GLM/Mendota_GRAPLE/	
+/Sunapee/GLM/Sunapee_GRAPLE/
