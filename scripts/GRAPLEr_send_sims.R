@@ -49,7 +49,7 @@ for (n in 1:8) {
 
 
 # Sunapee ####
-sim_folder  <-  ('/Users/KJF/Desktop/R/Mendota_Sunapee_NP/Sunapee/GLM')
+sim_folder  <-  ('/Users/kfarrell/Documents/R/Mendota_Sunapee_NP/Sunapee/GLM')
 setwd(sim_folder)
 
 MyExpRootDir <- paste(sim_folder,sep='/','MyExpRoot') # Met files and nml are here		
