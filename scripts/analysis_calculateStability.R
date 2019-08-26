@@ -2,7 +2,7 @@
 pacman::p_load(tidyverse)
 
 # Load files from Matlab ####
-matlab_path <- 'C:/Users/KJF/Dropbox/MATLAB/Lake-Analyzer-master'
+matlab_path <- 'C:/Users/kfarrell/Dropbox/MATLAB/Lake-Analyzer-master'
 
 stability <- full_join((file.path(matlab_path, 'Mendota_baseline/Mendota_results.txt') %>% 
                           read_delim(delim= "\t") %>%
