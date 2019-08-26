@@ -18,7 +18,7 @@ mytheme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_
 
 # Load output from GRAPLEr sims, both lakes #### 
 lakes <- bind_rows(read_csv('./output/Mendota_11AprAll_20190419.csv'), 
-                   read_csv('./output/Sunapee_11AprAll_20190416.csv')) %>%
+                   read_csv('./output/Sunapee_20AugAll_20190820.csv')) %>%
   select(-Tot_V) %>% 
   mutate(TNTP = (TN_mgL/TP_mgL)*(30.97/14.01))
 
@@ -168,8 +168,8 @@ ad.test(ad_TN_Men$`0`, ad_TN_Men$`6`)
 # Sunapee epi TN
 ad_TN_Sun <- activeseason_summary %>% spread(Sim, median) %>% 
   filter(Lake=="Sunapee", variable == 'TN_mgL', depth == '0')
-ad.test(ad_TN_Sun$`0`, ad_TN_Sun$`1`)
-ad.test(ad_TN_Sun$`0`, ad_TN_Sun$`2`)
+ad.test(ad_TN_Sun$`0`, ad_TN_Sun$`1`) # NS
+ad.test(ad_TN_Sun$`0`, ad_TN_Sun$`2`) # S
 ad.test(ad_TN_Sun$`0`, ad_TN_Sun$`3`)
 ad.test(ad_TN_Sun$`0`, ad_TN_Sun$`4`)
 ad.test(ad_TN_Sun$`0`, ad_TN_Sun$`5`)

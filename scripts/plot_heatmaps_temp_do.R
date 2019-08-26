@@ -65,7 +65,7 @@ output <- bind_rows(output, (left_join(Temp, DO) %>% left_join(., TP) %>% left_j
 write_csv(output, paste("./output/Mendota_highres_", format(Sys.Date(), "%Y%m%d"),'.csv', sep=""), append=F)
 
 #### SUNAPEE ######
-sim_folder <- './Sunapee/GLM/Sunapee_GRAPLE/GRAPLE_20190411'
+sim_folder <- './Sunapee/GLM/Sunapee_GRAPLE/newInflow_20190820'
 
 #### BASELINE, Sunapee ####
 nc_file <- file.path(sim_folder, 'baseline.nc') #this defines the output.nc file 

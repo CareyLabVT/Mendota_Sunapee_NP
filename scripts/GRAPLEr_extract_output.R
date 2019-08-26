@@ -840,4 +840,4 @@ output <- bind_rows(output, (left_join(Temp, DO) %>% left_join(., TP) %>%
                                mutate(Sim = "6"))) %>% 
   mutate(Lake = "Sunapee")
 
-write_csv(output, paste("./output/Sunapee_11AprAll_", format(Sys.Date(), "%Y%m%d"),'.csv', sep=""), append=F)
+write_csv(output, paste("./output/Sunapee_20AugAll_", format(Sys.Date(), "%Y%m%d"),'.csv', sep=""), append=F)

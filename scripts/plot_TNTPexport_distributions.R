@@ -17,7 +17,7 @@ mytheme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_
 
 # Load output from GRAPLEr sims, both lakes #### 
 lakes <- bind_rows(read_csv('./output/Mendota_11AprAll_20190419.csv'), 
-                   read_csv('./output/Sunapee_11AprAll_20190416.csv')) %>%
+                   read_csv('./output/Sunapee_20AugAll_20190820.csv')) %>%
   select(Lake, Sim, DateTime, depth, TN_mgL, TP_mgL) %>% 
   filter(depth == 4) %>% 
   mutate(Sim = as.factor(Sim), Date = as.Date(DateTime),

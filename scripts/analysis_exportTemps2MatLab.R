@@ -1,9 +1,9 @@
 # Pull water temps for MatLab thermocline calculation; save in MATLAB folders ####
 pacman::p_load(tidyverse, glmtools)
 
-matlab_path <- 'C:/Users/KJF/Dropbox/MATLAB/Lake-Analyzer-master'
+matlab_path <- 'C:/Users/kfarrell/Dropbox/MATLAB/Lake-Analyzer-master'
 Mendota_results <- './Mendota/GLM/Mendota_GRAPLE/GRAPLE_20190418'
-Sunapee_results <- './Sunapee/GLM/Sunapee_GRAPLE/GRAPLE_20190411'
+Sunapee_results <- './Sunapee/GLM/Sunapee_GRAPLE/newInflow_20190820'
 
 # Mendota ####
 menbaseline <- file.path(Mendota_results, 'baseline.nc')

@@ -33,7 +33,7 @@ menbaseline <- file.path('./output/Mendota_11AprAll_20190419.csv') %>%
 
 sun_folder <- './Sunapee/GLM'
 
-sunbaseline <- file.path('./output/Sunapee_11AprAll_20190416.csv') %>%
+sunbaseline <- file.path('./output/Sunapee_20AugAll_20190820.csv') %>%
   read_csv(.) %>% filter(Sim == '0') %>% rename(Depth = depth) %>% 
   select(DateTime, Depth, Temp, DO_mgL, TP_mgL, TN_mgL) %>% 
   mutate(Lake = 'Sunapee',
