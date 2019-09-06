@@ -22,7 +22,7 @@ mytheme <- theme(panel.grid.major = element_blank(),
 
 # Load output from GRAPLEr sims, both lakes #### 
 lakes <- bind_rows(read_csv('./output/Mendota_11AprAll_20190419.csv'), 
-                   read_csv('./output/Sunapee_11AprAll_20190416.csv')) 
+                   read_csv('./output/Sunapee_20AugAll_20190820.csv')) 
 
 temps <- lakes %>% 
   select(DateTime, Lake, Sim, depth, Temp) %>% 
@@ -142,4 +142,4 @@ onset_change <- strat_duration %>%
 
 onset_change %>%select(Lake, Diff) %>% 
   group_by(Lake) %>% 
-  summarize(onset_c = median(Diff)
+  summarize(onset_c = median(Diff))

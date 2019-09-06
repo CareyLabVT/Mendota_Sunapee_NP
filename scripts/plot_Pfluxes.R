@@ -17,7 +17,7 @@ mytheme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_
 
 #### Load P flux data; all scenarios ####
 Pflux <- bind_rows(read_csv('./output/Mendota_psed_20190419.csv'),
-                   read_csv('./output/Sunapee_psed_20190416.csv')) %>% 
+                   read_csv('./output/Sunapee_psed_20190904.csv')) %>% 
   mutate(year = year(DateTime), month = month(DateTime),
          sed_area_m2 = ifelse(Lake =="Mendota", 56502822, 16879430),
          SedPflux_mmold = PHS_sed_frp * sed_area_m2) %>%  # Sediment P flux

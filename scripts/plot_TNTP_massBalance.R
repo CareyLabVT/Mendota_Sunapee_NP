@@ -14,7 +14,7 @@ mytheme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_
 diagnostic_depths <- c(1, 20)
 
 lakes <- bind_rows(read_csv('./output/Mendota_11AprAll_20190416.csv'), 
-                   read_csv('./output/Sunapee_11AprAll_20190416.csv')) %>%
+                   read_csv('./output/Sunapee_20AugAll_20190820.csv')) %>%
   filter(Sim %in% c('0','6'), depth %in% diagnostic_depths) %>%
   mutate(Year = year(DateTime), yday = yday(DateTime))
 
@@ -263,7 +263,7 @@ inflow <- read_csv('./Sunapee/GLM/oneInflow.csv') %>%
   gather(var, value, FRP_mgL:TN_mgL) %>% ungroup() %>% 
   mutate(type = 'inflow', DateTime = as.Date(DateTime)) 
 
-surf <- read_csv('./output/Sunapee_all_20190226.csv') %>% 
+surf <- read_csv('./output/Sunapee_20Augall_20190820.csv') %>% 
   filter(depth == '0', Sim == '0') %>% 
   select(DateTime, depth, TP_mgL:PON_mgL) %>% 
   group_by(DateTime, depth) %>%
