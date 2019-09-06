@@ -423,7 +423,7 @@ write_csv(output, paste("./output/Mendota_11AprAll_", format(Sys.Date(), "%Y%m%d
 
 
 ####### SUNAPEE ######
-sim_folder <- './Sunapee/GLM/Sunapee_GRAPLE/newInflow_20190820'
+sim_folder <- './Sunapee/GLM/Sunapee_GRAPLE/newInflow_20190906'
 
 #### BASELINE ####
 nc_file <- file.path(sim_folder, 'baseline.nc') #this defines the output.nc file 

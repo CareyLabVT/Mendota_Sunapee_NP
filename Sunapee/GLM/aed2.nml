@@ -288,14 +288,14 @@
    phosphorus_reactant_variable = 'OXY_oxy' 
    Fsed_frp_variable =''
    simPO4Adsorption = .true.
-   ads_use_external_tss = .false.
+   ads_use_external_tss = .true.
    po4sorption_target_variable ='TRC_ss1'
    PO4AdsorptionModel = 1
    Kpo4p = 0.1
    ads_use_pH = .false.
    Kadsratio= 0.85
    Qmax = 1
-   w_po4ads = -0.05
+   w_po4ads = -1 !-0.05
 /
 
 !###############################################################################

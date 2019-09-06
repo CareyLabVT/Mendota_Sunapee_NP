@@ -13,8 +13,8 @@ mytheme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_
 
 diagnostic_depths <- c(1, 20)
 
-lakes <- bind_rows(read_csv('./output/Mendota_11AprAll_20190416.csv'), 
-                   read_csv('./output/Sunapee_20AugAll_20190820.csv')) %>%
+lakes <- bind_rows(read_csv('./output/Mendota_11AprAll_20190419.csv'), 
+                   read_csv('./output/Sunapee_20AugAll_20190906.csv')) %>%
   filter(Sim %in% c('0','6'), depth %in% diagnostic_depths) %>%
   mutate(Year = year(DateTime), yday = yday(DateTime))
 

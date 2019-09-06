@@ -18,7 +18,7 @@ mytheme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_
 
 # Load output from GRAPLEr sims, both lakes #### 
 lakes <- bind_rows(read_csv('./output/Mendota_11AprAll_20190419.csv'), 
-                   read_csv('./output/Sunapee_20AugAll_20190820.csv')) %>%
+                   read_csv('./output/Sunapee_20AugAll_20190906.csv')) %>%
   select(-Tot_V) %>% 
   mutate(TNTP = (TN_mgL/TP_mgL)*(30.97/14.01))
 
