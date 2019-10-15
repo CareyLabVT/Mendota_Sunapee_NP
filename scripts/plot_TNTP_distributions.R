@@ -18,7 +18,7 @@ mytheme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_
 
 # Load output from GRAPLEr sims, both lakes #### 
 lakes <- bind_rows(read_csv('./output/Mendota_11AprAll_20190419.csv'), 
-                   read_csv('./output/Sunapee_20AugAll_20190906.csv')) %>%
+                   read_csv('./output/Sunapee_11AprAll_20190416.csv')) %>%
   select(-Tot_V) %>% 
   mutate(TNTP = (TN_mgL/TP_mgL)*(30.97/14.01))
 
@@ -44,7 +44,8 @@ activeseason_summary <- lakes %>%
   select(Lake, Sim, year, depth, Temp:PON_mgL, TNTP) %>%
   gather(variable, value, Temp:TNTP) %>%
   group_by(Lake, Sim, year, depth, variable) %>%
-  summarize(median = median(value, na.rm=T))
+  summarize(median = median(value, na.rm=T)) %>% 
+  mutate(Trophic = ifelse(Lake =="Mendota", "High-nutrient", "Low-nutrient"))
 
 active_totalChange <- lakes %>% 
   mutate(year = year(DateTime), month = month(DateTime)) %>% 
@@ -69,7 +70,7 @@ overall_summary <- lakeYears %>%
 tn <- ggplot(data=subset(activeseason_summary, variable=='TN_mgL' & depth=='0'), 
        aes(x= median*1000, y = Sim, fill=Sim, group = Sim)) +
   geom_density_ridges() + mytheme + #mytheme + 
-  facet_grid(.~ Lake, scales="free_x") +
+  facet_grid(.~ Trophic, scales="free_x") +
   scale_fill_manual(values=jet.colors(7)) +
   scale_y_discrete(breaks=seq(0,6,1)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position='none') +
@@ -93,7 +94,7 @@ ggplot(subset(activeseason_summary, variable=='TN_mgL'),
 tp <- ggplot(data=subset(activeseason_summary, variable=='TP_mgL' & depth=='0'), 
        aes(x= (median*(1000)), y = Sim, fill=Sim, group = Sim)) +
   geom_density_ridges() + mytheme + #mytheme + 
-  facet_grid(. ~ Lake, scales = 'free_x') +
+  facet_grid(. ~ Trophic, scales = 'free_x') +
   scale_fill_manual(values=jet.colors(7)) +
   scale_shape_manual(values=c(21, 24)) +
   #scale_x_continuous(limits=c(0,4), breaks=seq(0,4,1)) +
@@ -131,7 +132,7 @@ ggplot(data=test,
 np <- ggplot(data=subset(activeseason_summary, variable=='TNTP' & depth=='0'), 
              aes(x= median, y = Sim, fill=Sim, group = Sim)) +
   geom_density_ridges() + mytheme + #mytheme + 
-  facet_grid(. ~ Lake, scales = 'free_x') +
+  facet_grid(. ~ Trophic, scales = 'free_x') +
   scale_fill_manual(values=jet.colors(7)) +
   scale_shape_manual(values=c(21, 24)) +
   #scale_x_continuous(limits=c(0,4), breaks=seq(0,4,1)) +
@@ -152,7 +153,11 @@ ggplot(subset(activeseason_summary, variable=='TNTP'),
   guides(fill=guide_legend(keyheight=0.1,title="Scenario")) +
   theme(legend.position = 'none')
 
-plot_grid(tn, tp, np, nrow=1, labels='AUTO', align='hv')
+joy <- plot_grid(tn, tp, np, nrow=1, labels='AUTO', align='hv')
+
+tiff(filename = "./output/figures/Figure7.tif", width = 12.14, height = 4.84, units = "in", compression = c("none"),res = 500)
+joy
+dev.off()
 
 # Anderson-Darling test, TN ####
 # Mendota epi TN
