@@ -78,7 +78,7 @@ output <- bind_rows(output, (left_join(vol, sedpflux) %>%
 write_csv(output, paste("./output/Mendota_psed_", format(Sys.Date(), "%Y%m%d"),'.csv', sep=""), append=F)
 
 ####### SUNAPEE ######
-sim_folder <- './Sunapee/GLM/Sunapee_GRAPLE/newInflow_20190820'
+sim_folder <- './Sunapee/GLM/Sunapee_GRAPLE/S_GRAPLE_20190411'
 
 #### BASELINE ####
 nc_file <- file.path(sim_folder, 'baseline.nc') #this defines the output.nc file 
