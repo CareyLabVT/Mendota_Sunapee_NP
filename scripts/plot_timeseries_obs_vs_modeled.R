@@ -33,7 +33,7 @@ menbaseline <- file.path('./output/Mendota_11AprAll_20190419.csv') %>%
 
 sun_folder <- './Sunapee/GLM'
 
-sunbaseline <- file.path('./output/Sunapee_20AugAll_20190820.csv') %>%
+sunbaseline <- file.path('./output/Sunapee_11AprAll_20190416.csv') %>%
   read_csv(.) %>% filter(Sim == '0') %>% rename(Depth = depth) %>% 
   select(DateTime, Depth, Temp, DO_mgL, TP_mgL, TN_mgL) %>% 
   mutate(Lake = 'Sunapee',
@@ -237,8 +237,12 @@ tp_m <- ggplot(subset(modTP, Lake=='Mendota'), aes(x = DateTime, y = TP_mgL*1000
   #geom_hline(data = subset(manTP, Lake == 'Mendota' & zone=='0-4m'), aes(yintercept=85), 
   #           col='tomato', lty=2, lwd=1)
 
-plot_grid(temp_m, do_m, tn_m, tp_m, ncol=1, align='v', labels='AUTO', 
+MEND <- plot_grid(temp_m, do_m, tn_m, tp_m, ncol=1, align='v', labels='AUTO', 
           rel_heights=c(1.1,1,1,1), label_y=c(1,1.1,1.1,1.15))
+
+tiff(filename = "./output/figures/Figure2.tif", width = 8, height = 10, units = "in", compression = c("none"),res = 500)
+MEND
+dev.off()
 
 ######## SUNAPEE PLOTS ALONE #######
 temp_s <- ggplot(subset(modTemps, Lake=='Sunapee'), aes(x = DateTime, y = meanTemp)) + mytheme + 
@@ -292,5 +296,9 @@ tp_s <- ggplot(subset(modTP, Lake=='Sunapee'), aes(x = DateTime, y = TP_mgL*1000
   #geom_hline(data = subset(manTP, Lake == 'Sunapee' & zone=='0-4m'), aes(yintercept=5.3), 
   #           col='tomato', lty=2, lwd=1)
 
-plot_grid(temp_s, do_s, tn_s, tp_s, ncol=1, align='v', labels='AUTO', 
+SUN <- plot_grid(temp_s, do_s, tn_s, tp_s, ncol=1, align='v', labels='AUTO', 
           rel_heights=c(1.1,1,1,1), label_y=c(1,1.1,1.1,1.15))
+
+tiff(filename = "./output/figures/Figure3.tif", width = 8, height = 10, units = "in", compression = c("none"),res = 500)
+SUN
+dev.off()
