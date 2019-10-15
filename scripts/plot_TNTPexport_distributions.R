@@ -127,13 +127,14 @@ inout <- left_join(summer_daily_outflow, inflow) %>%
   spread(Source, sum_kg) %>% 
   mutate(Flux = round(((Out-In)/In)*100,1), 
          Nut = factor(Nut, levels=c('DailyTN','DailyTP'),
-                      labels=c('Total Nitrogen','Total Phosphorus')))
+                      labels=c('Total Nitrogen','Total Phosphorus'))) %>% 
+  mutate(Trophic = ifelse(Lake =="Mendota", "High-nutrient", "Low-nutrient"))
 
 # Boxplots of flux ####
-ggplot(inout, aes(x= Sim, y = Flux, fill=Sim, group = Sim)) +
+flux <- ggplot(inout, aes(x= Sim, y = Flux, fill=Sim, group = Sim)) +
   geom_point(position=position_dodge(width = .75), cex= 4, pch=21) +
   geom_boxplot(alpha=0.75, outlier.shape=NA, show.legend = F) + mytheme +
-  facet_grid(Nut~Lake, scales='free') +
+  facet_grid(Nut~Trophic, scales='free') +
   #scale_y_continuous(limits=c(-100,25), breaks=seq(-100,25,25)) +
   scale_fill_manual(values=jet.colors(7)) +
   geom_hline(data=subset(inout, Nut=='Total Phosphorus'), aes(yintercept= 0), lty=2) +
@@ -141,6 +142,10 @@ ggplot(inout, aes(x= Sim, y = Flux, fill=Sim, group = Sim)) +
   theme(panel.spacing.y = unit(2, "lines"),
         panel.background=element_rect(fill='gray95'),
         legend.position='none')
+
+tiff(filename = "./output/figures/Figure8.tif", width = 8, height = 8, units = "in", compression = c("none"),res = 500)
+flux
+dev.off()
 
 # Calculate changes in medians ####
 flux_year_by_year <- inout %>%
