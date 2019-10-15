@@ -66,6 +66,20 @@ overall_summary <- lakeYears %>%
   group_by(Lake, Sim, depth, variable) %>%
   summarize(median_ugL = median(value, na.rm=T)*1000)
 
+# Range of TN, TP, TN:TP in baseline scenario #
+reviewer2 <- lakes %>% 
+  mutate(year = year(DateTime), month = month(DateTime)) %>% 
+  filter(month >=4, month<=10, # Select 'active months'
+         ifelse(Lake == "Mendota", depth %in% c(0,20), depth %in% c(0,18))) %>% 
+  mutate(Sim = as.factor(Sim),
+         TN_ugL = TN_mgL*1000, TP_ugL = TP_mgL*1000) %>% 
+  filter(Sim %in% c('0')) %>%
+  select(Lake, Sim, depth, TN_ugL, TP_ugL, TNTP) %>%
+  gather(variable, value, TN_ugL:TNTP) %>%
+  group_by(Lake, Sim, depth, variable) %>%
+  summarize(median = median(value, na.rm=T), min = min(value, na.rm=T), max=max(value,na.rm=T)) %>% 
+  mutate_at(5:7, list(~round(., 1))) 
+
 # Joyplot: Epi TN ####
 tn <- ggplot(data=subset(activeseason_summary, variable=='TN_mgL' & depth=='0'), 
        aes(x= median*1000, y = Sim, fill=Sim, group = Sim)) +
