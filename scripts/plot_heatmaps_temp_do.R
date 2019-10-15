@@ -65,7 +65,7 @@ output <- bind_rows(output, (left_join(Temp, DO) %>% left_join(., TP) %>% left_j
 write_csv(output, paste("./output/Mendota_highres_", format(Sys.Date(), "%Y%m%d"),'.csv', sep=""), append=F)
 
 #### SUNAPEE ######
-sim_folder <- './Sunapee/GLM/Sunapee_GRAPLE/newInflow_20190820'
+sim_folder <- './Sunapee/GLM/Sunapee_GRAPLE/S_GRAPLE_20190411'
 
 #### BASELINE, Sunapee ####
 nc_file <- file.path(sim_folder, 'baseline.nc') #this defines the output.nc file 
@@ -217,7 +217,7 @@ menTemp0 <- ggplot(interp_temp_men0, aes(x= x, y= y))+
   scale_fill_gradientn(colours = blue2green2red(60), limits=c(0,35),
                        breaks=seq(0,35,5), labels=seq(0,35,5))+
   labs(x = "", y = "Depth (m)", fill=expression(''*~degree*C*'')) +
-  ggtitle(expression(Mendota~~+0*degree*C)) +
+  ggtitle(expression(High-nutrient~~+0*degree*C)) +
   mytheme + theme(legend.position='none')
 
 menTemp6 <- ggplot(interp_temp_men6, aes(x= x, y= y))+
@@ -229,7 +229,7 @@ menTemp6 <- ggplot(interp_temp_men6, aes(x= x, y= y))+
                        breaks=seq(0,35,5), labels=seq(0,35,5),
                        guide= guide_colorbar(barwidth=1.5, barheight=15)) +
   labs(x = "", y = "", fill=expression(''*~degree*C*'')) +
-  ggtitle(expression(Mendota~~+6*degree*C)) +
+  ggtitle(expression(High-nutrient~~+6*degree*C)) +
   mytheme + theme(legend.text.align = 1)
 
 sunTemp0 <- ggplot(interp_temp_sun0, aes(x= x, y= y))+
@@ -240,7 +240,7 @@ sunTemp0 <- ggplot(interp_temp_sun0, aes(x= x, y= y))+
   scale_fill_gradientn(colours = blue2green2red(60), limits=c(0,32),
                        breaks=seq(0,32,8), labels=seq(0,32,8)) +
   labs(x = "Date", y = "Depth (m)", fill=expression(''*~degree*C*'')) +
-  ggtitle(expression(Sunapee~~+0*degree*C)) +
+  ggtitle(expression(Low-nutrient~~+0*degree*C)) +
   mytheme + theme(legend.position='none')
 
 sunTemp6 <- ggplot(interp_temp_sun6, aes(x= x, y= y))+
@@ -252,11 +252,15 @@ sunTemp6 <- ggplot(interp_temp_sun6, aes(x= x, y= y))+
                        breaks=seq(0,32,8), labels=seq(0,32,8),
                        guide= guide_colorbar(barwidth=1.5, barheight=15)) +
   labs(x = "Date", y = "", fill=expression(''*~degree*C*'')) +
-  ggtitle(expression(Sunapee~~+6*degree*C)) +
+  ggtitle(expression(Low-nutrient~~+6*degree*C)) +
   mytheme + theme(legend.text.align = 1)
 
-plot_grid(menTemp0, menTemp6, sunTemp0, sunTemp6, labels='AUTO', 
+temps <- plot_grid(menTemp0, menTemp6, sunTemp0, sunTemp6, labels='AUTO', 
           nrow=2, ncol=2, rel_widths = c(1,1.2))
+
+tiff(filename = "./output/figures/Figure4.tif", width = 8, height = 8, units = "in", compression = c("none"),res = 500)
+temps
+dev.off()
 
 # Plotting DO ####
 menDO0 <- ggplot(interp_do_men0, aes(x= x, y= y))+
@@ -268,7 +272,7 @@ menDO0 <- ggplot(interp_do_men0, aes(x= x, y= y))+
                        breaks=seq(0,15,3), labels=seq(0,15,3))+
   labs(x = "", y = "Depth (m)", fill=expression('mg'~~L^-1)) +
   #geom_hline(yintercept = 20, lty=2, col='black') +
-  ggtitle(expression(Mendota~~+0*degree*C)) +
+  ggtitle(expression(High-nutrient~~+0*degree*C)) +
   mytheme + theme(legend.position='none')
 
 menDO6 <- ggplot(interp_do_men6, aes(x= x, y= y))+
@@ -281,7 +285,7 @@ menDO6 <- ggplot(interp_do_men6, aes(x= x, y= y))+
                        guide= guide_colorbar(barwidth=1.5, barheight=15))+
   labs(x = "", y = "", fill=expression('mg'~~L^-1)) +
   #geom_hline(yintercept = 20, lty=2, col='black') +
-  ggtitle(expression(Mendota~~+6*degree*C)) +
+  ggtitle(expression(High-nutrient~~+6*degree*C)) +
   mytheme + theme(legend.text.align = 1)
 
 sunDO0 <- ggplot(interp_do_sun0, aes(x= x, y= y))+
@@ -293,7 +297,7 @@ sunDO0 <- ggplot(interp_do_sun0, aes(x= x, y= y))+
                        breaks=seq(0,15,3), labels=seq(0,15,3))+
   labs(x = "Date", y = "Depth (m)", fill=expression('mg'~~L^-1)) +
   #geom_hline(yintercept = 28, lty=2, col='black') +
-  ggtitle(expression(Sunapee~~+0*degree*C)) +
+  ggtitle(expression(Low-nutrient~~+0*degree*C)) +
   mytheme + theme(legend.position='none')
 
 sunDO6 <- ggplot(interp_do_sun6, aes(x= x, y= y))+
@@ -306,8 +310,12 @@ sunDO6 <- ggplot(interp_do_sun6, aes(x= x, y= y))+
                        guide= guide_colorbar(barwidth=1.5, barheight=15))+
   labs(x = "Date", y = "", fill=expression('mg'~~L^-1)) +
   #geom_hline(yintercept = 28, lty=2, col='black') +
-  ggtitle(expression(Sunapee~~+6*degree*C)) +
+  ggtitle(expression(Low-nutrient~~+6*degree*C)) +
   mytheme + theme(legend.text.align = 1)
 
-plot_grid(menDO0, menDO6, sunDO0, sunDO6, labels='AUTO', 
+do <- plot_grid(menDO0, menDO6, sunDO0, sunDO6, labels='AUTO', 
           nrow=2, ncol=2, rel_widths = c(1,1.2))
+
+tiff(filename = "./output/figures/Figure5.tif", width = 8, height = 8, units = "in", compression = c("none"),res = 500)
+do
+dev.off()
