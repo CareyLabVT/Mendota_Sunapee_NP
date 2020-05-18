@@ -2,49 +2,49 @@
 pacman::p_load(tidyverse)
 
 # Load files from Matlab ####
-matlab_path <- 'C:/Users/kfarrell/Dropbox/MATLAB/Lake-Analyzer-master'
+matlab_path <- './output/MATLAB'
 
-stability <- full_join((file.path(matlab_path, 'Mendota_baseline/Mendota_results.txt') %>% 
+stability <- full_join((file.path(matlab_path, 'Mendota_results_baseline.txt') %>% 
                           read_delim(delim= "\t") %>%
                           mutate(Lake = "Mendota", Sim = "0")),
-                       (file.path(matlab_path, 'Mendota_plus1/Mendota_results.txt') %>% 
+                       (file.path(matlab_path, 'Mendota_results_plus1.txt') %>% 
                           read_delim(delim= "\t") %>%
                           mutate(Lake = "Mendota", Sim = "1"))) %>%
-  full_join(., (file.path(matlab_path, 'Mendota_plus2/Mendota_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Mendota_results_plus2.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Mendota", Sim = "2"))) %>%
-  full_join(., (file.path(matlab_path, 'Mendota_plus3/Mendota_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Mendota_results_plus3.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Mendota", Sim = "3"))) %>%
-  full_join(., (file.path(matlab_path, 'Mendota_plus4/Mendota_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Mendota_results_plus4.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Mendota", Sim = "4"))) %>%
-  full_join(., (file.path(matlab_path, 'Mendota_plus5/Mendota_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Mendota_results_plus5.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Mendota", Sim = "5"))) %>%
-  full_join(., (file.path(matlab_path, 'Mendota_plus6/Mendota_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Mendota_results_plus6.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Mendota", Sim = "6"))) %>%
   #Sunapee
-  full_join(., (file.path(matlab_path, 'Sunapee_baseline/Sunapee_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Sunapee_results_baseline.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Sunapee", Sim = "0"))) %>%
-  full_join(., (file.path(matlab_path, 'Sunapee_plus1/Sunapee_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Sunapee_results_plus1.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Sunapee", Sim = "1"))) %>%
-  full_join(., (file.path(matlab_path, 'Sunapee_plus2/Sunapee_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Sunapee_results_plus2.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Sunapee", Sim = "2"))) %>%
-  full_join(., (file.path(matlab_path, 'Sunapee_plus3/Sunapee_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Sunapee_results_plus3.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Sunapee", Sim = "3"))) %>%
-  full_join(., (file.path(matlab_path, 'Sunapee_plus4/Sunapee_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Sunapee_results_plus4.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Sunapee", Sim = "4"))) %>%
-  full_join(., (file.path(matlab_path, 'Sunapee_plus5/Sunapee_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Sunapee_results_plus5.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Sunapee", Sim = "5"))) %>%
-  full_join(., (file.path(matlab_path, 'Sunapee_plus6/Sunapee_results.txt') %>% 
+  full_join(., (file.path(matlab_path, 'Sunapee_results_plus6.txt') %>% 
                   read_delim(delim= "\t") %>%
                   mutate(Lake = "Sunapee", Sim = "6"))) %>%
  write_csv('./output/stability_all.csv')
