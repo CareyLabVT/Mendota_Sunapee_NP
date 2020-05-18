@@ -1,9 +1,9 @@
 pacman::p_load(akima, cowplot, tidyverse)
 #options(scipen = 999)
 
-sun <-  read_csv('./Sunapee/GLM/observed_data/raw/sunapee_area_by_depth.csv')
+sun <-  read_csv('./Sunapee/GLM/observed_data/sunapee_area_by_depth.csv')
 
-men <- read_csv('./Mendota/GLM/observed_data/raw/mendota_area_by_depth.csv') 
+men <- read_csv('./Mendota/GLM/observed_data/mendota_area_by_depth.csv') 
 
 # What % of Mendota area is at/below 20.1m? ####
 men %>% select(Depth, Area) %>% 
